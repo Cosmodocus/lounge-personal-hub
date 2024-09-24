@@ -7,12 +7,6 @@
   --foreground: #171717;
 }
 
-@font-face {
-  font-family: "GeistMono";
-  src: url("/assets/fonts/GeistMonoVF.woff") format("woff");
-  font-weight: normal;
-  font-style: normal;
-}
 
 @media (prefers-color-scheme: dark) {
   :root {
@@ -31,7 +25,6 @@ body {
   color: var(--foreground);
   background: var(--background);
   overscroll-behavior-y: none;
-  font-family: "GeistMono", sans-serif;
 }
 
 @layer utilities {
