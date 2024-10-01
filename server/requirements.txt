@@ -18,6 +18,7 @@ python-dotenv==1.0.0
 
 # Password hashing and verification
 passlib[bcrypt]==1.7.4
+bcrypt==3.2.0  # Explicitly added bcrypt version to avoid Rust requirement
 
 # JWT token generation and verification
 python-jose[cryptography]==3.3.0

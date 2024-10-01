@@ -8,6 +8,7 @@ Ensure you have the following installed on your machine:
 
 - Python 3.12 or later
 - Virtual environment for Python
+- PostgreSQL 14 or later(Ensure the PostgreSQL service is running)
 
 ## Step 1: Setting Up the Virtual Environment
 
@@ -18,7 +19,7 @@ Ensure you have the following installed on your machine:
 
 2. Create a virtual environment:
     ```bash
-    python -m venv venv
+    python3 -m venv venv
     ```
 
 3. Activate the virtual environment:
@@ -38,37 +39,54 @@ Install all dependencies from `requirements.txt`:
     pip install -r requirements.txt
     ```
 
-## Step 3: Open your PostgreSQL client:
-1. Open your PostgreSQL client:
+## Step 3: Open your PostgreSQL client
+
+1. Ensure PostgreSQL is running:
+    - On macOS with Homebrew:
+      ```bash
+      brew services start postgresql@14
+      ```
+    - On Linux:
+      ```bash
+      sudo service postgresql start
+      ```
+    - On Windows: Start the PostgreSQL service via `pgAdmin` or services.msc.
+
+2. Open your PostgreSQL client using the default `postgres` database:
     ```bash
-    psql -U postgres
+    psql -U $(whoami) -d postgres
     ```
 
-2. Create a new user (if one doesn’t exist):
+3. Create a new user (if one doesn’t exist):
     ```sql
     CREATE USER <your_username> WITH PASSWORD '<your_password>';
     ```
 
-3. Create a new database:
+4. Create a new database (if you don't want to use `postgres`):
     ```sql
     CREATE DATABASE <your_database>;
     ```
 
-4. Grant privileges to the newly created user:
+5. Grant privileges to the newly created user:
     ```sql
     GRANT ALL PRIVILEGES ON DATABASE <your_database> TO <your_username>;
+    ```
+
+6. (Optional) To create a database for your system user if you want to use it:
+    ```sql
+    CREATE DATABASE $(whoami);
     ```
 
 ## Step 4: Configure Your `.env` File
 
 Create a `.env` file in the server folder and add the following environment variables:
 
-    ```bash
+    
     SECRET_KEY=your_super_secret_key
     ALGORITHM=HS256
     ACCESS_TOKEN_EXPIRE_MINUTES=30
     DATABASE_URL=postgresql://<your_username>:<your_password>@localhost/<your_database>
-    ```
+    
 
 ## Step 5: Set Up Alembic (Database Migrations)
 
