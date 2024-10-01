@@ -1,7 +1,6 @@
-# Ignore virtual environment directories
+# Ignore the virtual environment
 venv/
 .venv/
-server/venv/
 
 # Ignore Python cache files
 __pycache__/
@@ -15,21 +14,6 @@ __pycache__/
 logs/
 *.log
 
-# Ignore database files
-*.sqlite3
-*.db
-
-# Ignore editor and IDE settings
-.vscode/
-.idea/
-*.sublime-workspace
-*.code-workspace
-
-# Ignore build and distribution folders
-build/
-dist/
-*.egg-info/
-
 # Ignore temporary files
 *.tmp
 *.temp
@@ -39,12 +23,17 @@ tmp/
 .DS_Store
 Thumbs.db
 
-# If you have a frontend directory with Node.js dependencies
-frontend/node_modules/
-
 # Ignore coverage reports
 htmlcov/
 .coverage
 
 # Ignore pytest cache
 .pytest_cache/
+
+# Alembic files to include
+# Do NOT ignore 'alembic/' or its contents
+
+# If you have any temporary or backup files in Alembic directories
+# Ignore them explicitly
+alembic/versions/*.tmp
+alembic/versions/*~
