@@ -1,8 +1,39 @@
 # Ignore the virtual environment
-/.venv/
+venv/
+.venv/
 
 # Ignore Python cache files
 __pycache__/
 *.py[cod]
+*$py.class
 
+# Ignore environment variables file
+.env
 
+# Ignore log files
+logs/
+*.log
+
+# Ignore temporary files
+*.tmp
+*.temp
+tmp/
+
+# Ignore OS-specific files
+.DS_Store
+Thumbs.db
+
+# Ignore coverage reports
+htmlcov/
+.coverage
+
+# Ignore pytest cache
+.pytest_cache/
+
+# Alembic files to include
+# Do NOT ignore 'alembic/' or its contents
+
+# If you have any temporary or backup files in Alembic directories
+# Ignore them explicitly
+alembic/versions/*.tmp
+alembic/versions/*~

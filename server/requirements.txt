@@ -1,1 +1,30 @@
-fastapi[standard]
+# FastAPI with standard packages
+fastapi[standard]==0.95.2
+
+# ASGI server for FastAPI
+uvicorn[standard]==0.22.0
+
+# SQLAlchemy for ORM
+sqlalchemy==1.4.49
+
+# PostgreSQL database adapter for SQLAlchemy
+psycopg2-binary==2.9.7
+
+# Alembic for database migrations
+alembic==1.11.2
+
+# For loading environment variables
+python-dotenv==1.0.0
+
+# Password hashing and verification
+passlib[bcrypt]==1.7.4
+bcrypt==3.2.0  # Explicitly added bcrypt version to avoid Rust requirement
+
+# JWT token generation and verification
+python-jose[cryptography]==3.3.0
+
+# Email validation (optional, if you use it)
+email-validator==1.3.1
+
+# Handling form data (optional, but commonly needed)
+python-multipart==0.0.6
