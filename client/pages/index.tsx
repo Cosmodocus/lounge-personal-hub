@@ -1,12 +1,21 @@
 import MainLayout from "layouts/MainLayout";
 import { ReactNode, useState } from "react";
 
+// Define the shape of the user object
+interface UserDetails {
+    username: string;
+    fullname: string;
+    email: string;
+    created: string;  // assuming it's a string format of datetime
+}
+
 const HomePage = () => {
     const [username, setUsername] = useState("");
     const [fullname, setFullname] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [responseMessage, setResponseMessage] = useState("");
+    const [userDetails, setUserDetails] = useState<UserDetails | null>(null); // Define type for userDetails
     const [error, setError] = useState("");
 
     const handleRegister = async () => {
@@ -25,11 +34,14 @@ const HomePage = () => {
             });
 
             if (!response.ok) {
-                throw new Error(`Error: ${response.status}`);
+                const errorData = await response.json();
+                throw new Error(errorData.detail || `Error: ${response.status}`);
             }
 
             const data = await response.json();
-            setResponseMessage(data.message || "Registration successful!");
+            setResponseMessage(data.message);  // Store the success message
+            setUserDetails(data.user);  // Store the user details
+
         } catch (error: any) {
             setError(error.message);
         }
@@ -64,9 +76,20 @@ const HomePage = () => {
             />
             <button onClick={handleRegister}>Register</button>
 
-            {/* Display response or error */}
+            {/* Display response message or error */}
             {responseMessage && <p>{responseMessage}</p>}
             {error && <p>Error: {error}</p>}
+
+            {/* Optionally display the user details */}
+            {userDetails && (
+                <div>
+                    <h2>User Details:</h2>
+                    <p>Username: {userDetails.username}</p>
+                    <p>Email: {userDetails.email}</p>
+                    <p>Full Name: {userDetails.fullname}</p>
+                    <p>Created At: {new Date(userDetails.created).toLocaleString()}</p>
+                </div>
+            )}
         </div>
     );
 };
